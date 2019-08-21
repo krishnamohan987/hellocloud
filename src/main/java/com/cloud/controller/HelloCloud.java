@@ -10,7 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import com.cloud.model.CloudBasic;
 
 @RestController
@@ -33,9 +34,19 @@ public class HelloCloud {
 
 	public HttpHeaders generateResponseHeader() {
 		HttpHeaders responseHeaders = new HttpHeaders();
-		String hostName = env.getProperty(ENV_KEY_HOSTNAME);
-		LOGGER.info("** instanceId {} ****", hostName);
+		InetAddress ip;
+		try{
+			ip=InetAddress.getLocalHost();
+			String hostName=ip.getHostName();
+			System.out.println("########"+hostName);
+			LOGGER.info("** instanceId {} ****", hostName);
 		responseHeaders.set("instanceId", hostName != null ? hostName : HOSTNAME_NOTFOUND);
+			
+			
+		}catch(Exception e){
+		}
+		//String hostName = env.getProperty(ENV_KEY_HOSTNAME);
+		
 		return responseHeaders;
 	}
 }

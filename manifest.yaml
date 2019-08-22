@@ -1,23 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: hellocloud-app
-  name: hellocloud-app
-  namespace: hellocloud-ns
+  name: hellocloud-app
 spec:
-  progressDeadlineSeconds: 600
-  replicas: 3
-  revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      app: hellocloud-app
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: hellocloud-app
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hellocloud-app
+  template:
+    metadata:
+      labels:
+        app: hellocloud-app
+    spec:
+      containers:
+      - name: hellocloud-app
+        image: gcr.io/hellocloud-250416/krishnamohan/hellocloud

@@ -65,7 +65,7 @@
 		</dependency>
 
 
-		<!-- other 3rd-party artifact dependencies -->
+		<!-- other 3rd-party artifact dependencies ... -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>

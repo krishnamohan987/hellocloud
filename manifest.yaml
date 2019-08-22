@@ -7,7 +7,7 @@ metadata:
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "hellocloud"
+  name: "hellocloud-app"
   namespace: "hellocloud-ns"
   labels:
     app: "hellocloud-app"

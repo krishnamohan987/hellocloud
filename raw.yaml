@@ -1,0 +1,46 @@
+---
+apiVersion: "v1"
+kind: "Namespace"
+metadata:
+  name: "hellocloudu-ns"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "hellocloudu"
+  namespace: "hellocloudu-ns"
+  labels:
+    app: "hellocloudu"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "hellocloudu"
+  template:
+    metadata:
+      labels:
+        app: "hellocloudu"
+    spec:
+      containers:
+      - name: "hellocloud-sha256"
+        image: "gcr.io/hellocloud-250416/krishnamohan/hellocloud@sha256:f8b2a2b94628aaec4cba8f4adc6759fbcb1c3b13b4449ca81d264a8e70379f4b"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "hellocloudu-hpa"
+  namespace: "hellocloudu-ns"
+  labels:
+    app: "hellocloudu"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "hellocloudu"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80

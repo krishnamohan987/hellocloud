@@ -1,17 +1,26 @@
-apiVersion: apps/v1
-kind: Deployment
+---
+apiVersion: "v1"
+kind: "Namespace"
 metadata:
-  name: hellocloud-app
+  name: "hellocloud-ns"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "hellocloud"
+  namespace: "hellocloud-ns"
+  labels:
+    app: "hellocloud-app"
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: hellocloud-app
-  template:
-    metadata:
-      labels:
-        app: hellocloud-app
-    spec:
-      containers:
-      - name: hellocloud-app
-        image: gcr.io/hellocloud-250416/krishnamohan/hellocloud
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "hellocloud-app"
+  template:
+    metadata:
+      labels:
+        app: "hellocloud-app"
+    spec:
+      containers:
+      - name: "hellocloud-sha256"
+        image: "gcr.io/hellocloud-250416/krishnamohan/hellocloud:latest"

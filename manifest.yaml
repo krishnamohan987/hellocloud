@@ -21,16 +21,3 @@ spec:
     metadata:
       labels:
         app: hellocloud-app
-    spec:
-      containers:
-      - image: gcr.io/hellocloud-250416/krishnamohan/hellocloud
-        imagePullPolicy: IfNotPresent
-        name: hellocloud
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30

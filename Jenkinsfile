@@ -13,7 +13,12 @@ pipeline {
         git credentialsId: 'git-ssh-credentials', url: 'git@github.com:krishnamohan987/hellocloud.git'
       }
     }
-        stage('Maven Build') { 
+
+
+        stage('Maven Build') {
+         when {
+                        branch 'Development'
+                    }
            steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install'
              }

@@ -11,7 +11,6 @@ pipeline {
         stage('Cloning Git') {
       steps {
         git credentialsId: 'git-ssh-credentials', url: 'git@github.com:krishnamohan987/hellocloud.git'
-        build job: 'simple-java-maven-app'
       }
     }
         stage('Maven Build') { 
@@ -40,5 +39,17 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
+            stage('Deploy Staging') {
+            steps{
+               // git url: 'git url'
+                step([$class: 'KubernetesEngineBuilder', 
+                        projectId: "hellocloud-250416",
+                        clusterName: "hellocloud-cluster",
+                        zone: "us-central1-a",
+                        manifestPattern: '/',
+                        credentialsId: "GKE-Project-Cred",
+                        verifyDeployments: true])
+            }
+        }
  }
 }

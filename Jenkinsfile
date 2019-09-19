@@ -37,7 +37,7 @@ pipeline {
     stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:latest" //$BUILD_NUMBER"
-          sh "rm -rf /var/lib/jenkins/workspace/*"
+         // sh "rm -rf /var/lib/jenkins/workspace/*"
       }
     }
             stage('Deploy Staging') {

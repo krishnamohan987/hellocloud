@@ -1,14 +1,14 @@
 ---
-apiVersion: "v1"
-kind: "Namespace"
-metadata:
-  name: "hellocloud-ns"
+#apiVersion: "v1"
+#kind: "Namespace"
+#metadata:
+#  name: "hellocloud-ns"
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "hellocloud-app"
-  namespace: "hellocloud-ns"
+  namespace: "hellocloud"
   labels:
     app: "hellocloud-app"
 spec:
@@ -22,5 +22,5 @@ spec:
         app: "hellocloud-app"
     spec:
       containers:
-      - name: "hellocloud-sha256"
-        image: "gcr.io/hellocloud-250416/krishnamohan/hellocloud:latest"
+      - name: "hellocloud"
+        image: "devopscloud987/hellocloud:latest"

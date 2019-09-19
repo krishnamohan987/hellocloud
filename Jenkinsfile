@@ -21,7 +21,7 @@ pipeline {
         stage('Docker Build') {
             steps{
                 script {
-                 dockerImage=docker.build registry + ":$BUILD_NUMBER"
+                 dockerImage=docker.build registry + ":latest" //$BUILD_NUMBER"
       }
     }
   }
@@ -37,6 +37,7 @@ pipeline {
     stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
+          sh "rm -rf /var/lib/jenkins/workspace"
       }
     }
             stage('Deploy Staging') {

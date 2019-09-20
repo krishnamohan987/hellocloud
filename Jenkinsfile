@@ -21,7 +21,7 @@ pipeline {
         stage('Docker Build') {
             steps{
                 script {
-                 dockerImage=docker.build registry + ":latest" //$BUILD_NUMBER"
+                 dockerImage=docker.build registry + ":$BUILD_NUMBER"
       }
     }
   }
@@ -36,20 +36,15 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:latest" //$BUILD_NUMBER"
-         // sh "rm -rf /var/lib/jenkins/workspace/*"
+        sh "docker rmi $registry:$BUILD_NUMBER"
+         
       }
     }
             stage('Deploy Staging') {
             steps{
-               // git url: 'git url'
-                step([$class: 'KubernetesEngineBuilder', 
-                        projectId: "hellocloud-250416",
-                        clusterName: "hellocloud-cluster",
-                        zone: "us-central1-a",
-                        manifestPattern: '/',
-                        credentialsId: "GKE-Project-Cred",
-                        verifyDeployments: true])
+              sh 'echo "Kubernetes:::"'
+              sh 'kubectl version --short'
+              sh 'rm -rf /var/lib/jenkins/workspace/*'
             }
         }
  }

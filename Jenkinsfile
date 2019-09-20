@@ -10,7 +10,7 @@ pipeline {
         stages { 
         stage('Cloning Git') {
       steps {
-        git credentialsId: 'git-ssh-credentials', url: 'git@github.com:krishnamohan987/hellocloud.git'
+        git branch: 'Development' credentialsId: 'git-ssh-credentials', url: 'git@github.com:krishnamohan987/hellocloud.git'
       }
     }
         stage('Maven Build') { 

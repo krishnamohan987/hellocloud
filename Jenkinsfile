@@ -26,7 +26,7 @@ pipeline {
                 /*script {
                  dockerImage=docker.build registry + ":$BUILD_NUMBER"
       }*/
-                sh 'docker build krishnamohan987/hellocloud:1.0 . '
+                sh 'docker build https://hub.docker.com/krishnamohan987/hellocloud:1.0 . '
     }
   }
         stage('Deploy Image') {

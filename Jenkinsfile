@@ -1,7 +1,7 @@
 pipeline {
     
      environment {
-         registry = "devopscloud987/hellocloud"
+         registry = "krishnamohan987/hellocloud"
          registryCredential = 'docker-hub-creds'
          dockerImage = ''
     }
@@ -10,7 +10,7 @@ pipeline {
         stages { 
         stage('Cloning Git') {
       steps {
-        git credentialsId: 'git-ssh-credentials', url: 'git@github.com:krishnamohan987/hellocloud.git'
+        git credentialsId: 'jenkins-git-key', url: 'git@github.com:krishnamohan987/hellocloud.git'
       }
     }
 
@@ -37,10 +37,10 @@ pipeline {
         }
       }
     }
-    stage('Remove Unused docker image') {
+   /* stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
-    }
+    }*/
  }
 }

@@ -24,7 +24,7 @@ public class HelloCloud {
 	@Autowired
 	private Environment env;
 
-	@GetMapping("/basic")
+	@GetMapping("/basic1")
 	public ResponseEntity<?> getCloudBasicDetails() {
 		LOGGER.info("** START OF THE REQUEST ****");
 		CloudBasic basic = new CloudBasic();
@@ -32,7 +32,7 @@ public class HelloCloud {
 		LOGGER.info("** END OF THE RESPONSE {} ****", basic);
 		return new ResponseEntity<>(basic, generateResponseHeader(), HttpStatus.OK);
 	}
-
+	@GetMapping("/basic2")
 	public HttpHeaders generateResponseHeader() {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		InetAddress ip;

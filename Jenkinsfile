@@ -21,14 +21,15 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true install'
              }
         }
-        stage('Docker Build') {
+        stage('Build Image') {
             steps{
                 script {
-                 dockerImage=docker.build registry + ":$BUILD_NUMBER"
+                 //dockerImage=docker.build registry + ":$BUILD_NUMBER"
+                 dockerImage=docker.build registry + "latest"
       }
     }
   }
-        stage('Deploy Image') {
+        stage('Push Image') {
             steps{
                    script {
                     docker.withRegistry( '', registryCredential ) {
@@ -38,11 +39,23 @@ pipeline {
            
                  }
             }
+            stage('Deploy') {
+            steps{
+                
+                step([$class: 'KubernetesEngineBuilder', 
+                        projectId: "first-project-krimon",
+                        clusterName: "first-cluster",
+                        zone: "us-central1-c",
+                        manifestPattern: '/manifest.yaml',
+                        credentialsId: "first-project",
+                        verifyDeployments: true])
+            }
+        }
    
-    stage('Remove Unused docker image') {
+   /* stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
-    }
+    }*/
  }
 }

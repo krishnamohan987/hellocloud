@@ -1,2 +1,2 @@
 # hellocloud
-this is the POC for cloud technologies strategy.
+this is the POC for cloud technologies strategy..

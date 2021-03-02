@@ -23,27 +23,26 @@ pipeline {
         }
         stage('Docker Build') {
             steps{
-                /*script {
+                script {
                  dockerImage=docker.build registry + ":$BUILD_NUMBER"
-      }*/
-                step([$class: 'DockerBuilderPublisher', cleanImages: false, cleanupWithJenkinsJobDelete: false, cloud: '', dockerFileDirectory: '', fromRegistry: [credentialsId: 'docker-hub-creds', url: 'https://hub.docker.com'], pushCredentialsId: 'docker-hub-creds', pushOnSuccess: true, tagsString: 'krishnamohan987/hellocloud'])
+      }
     }
   }
         stage('Deploy Image') {
             steps{
                    script {
-                    /*docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( '', registryCredential ) {
                             dockerImage.push() 
-                                } */
+                                }
                             }
            
                  }
             }
    
-   /* stage('Remove Unused docker image') {
+    stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
-    }*/
+    }
  }
 }

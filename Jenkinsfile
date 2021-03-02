@@ -31,11 +31,12 @@ pipeline {
   }
         stage('Deploy Image') {
       steps{
-        script {
+        /*script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
-        }
+        }*/
+           sh 'docker push krishnamohan987/hellocloud'
       }
     }
    /* stage('Remove Unused docker image') {

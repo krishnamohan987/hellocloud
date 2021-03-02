@@ -46,7 +46,7 @@ pipeline {
                         projectId: "first-project-krimon",
                         clusterName: "first-cluster",
                         zone: "us-central1-c",
-                        manifestPattern: '/manifest.yaml',
+                        manifestPattern: 'k8s/',
                         credentialsId: "first-project",
                         verifyDeployments: true])
             }

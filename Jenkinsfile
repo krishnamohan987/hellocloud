@@ -48,7 +48,7 @@ pipeline {
                         zone: "us-central1-c",
                         manifestPattern: 'k8s/',
                         credentialsId: "first-project",
-                        verifyDeployments: true])
+                        verifyDeployments: false])
             }
         }
    

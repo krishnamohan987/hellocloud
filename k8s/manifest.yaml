@@ -24,3 +24,21 @@ spec:
       containers:
       - name: "hellocloud"
         image: "registry.hub.docker.com/krishnamohan987/hellocloud:latest"
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "hellocloud"
+  namespace: "hellocloud"
+  labels:
+    app: "hellocloud-app"
+    app.kubernetes.io/managed-by: "graphite-jenkins-gke"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 8080
+  selector:
+    app: "hellocloud-app"
+  type: "LoadBalancer"
+  loadBalancerIP: ""

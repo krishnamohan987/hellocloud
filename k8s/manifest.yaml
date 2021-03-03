@@ -23,4 +23,4 @@ spec:
     spec:
       containers:
       - name: "hellocloud"
-        image: "hub.docker.com/krishnamohan987/hellocloud:latest"
+        image: "registry.hub.docker.com/krishnamohan987/hellocloud:latest"

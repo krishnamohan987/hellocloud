@@ -5,8 +5,7 @@ RUN     apk add --no-cache ca-certificates java-cacerts openssl binutils
 RUN     jlink \
         --module-path /opt/java/jmods \
         --compress=2 \
-        --add-modules
-        jdk.management.agent, java.base,java.lgging, java.xml, jdk.unsupported, java.sql, java.naming, java.desktop, java.management, java.security.jgss, java.instrument, java.scripting, jdk.crypto.ec, java.rmi, jdk.httpserver, jdk.zips, jdk.net \
+        --add-modules jdk.management.agent, java.base,java.logging, java.xml, jdk.unsupported, java.sql, java.naming, java.desktop, java.management, java.security.jgss, java.instrument, java.scripting, jdk.crypto.ec, java.rmi, jdk.httpserver, jdk.zips, jdk.net \
         --scrit-debug \
         --no-header-files \
         --no-man-pages \
@@ -22,7 +21,7 @@ FROM scratch
 COPY --chown=1001:1001 --from=alpha /lib /lib
 COPY --chown=1001:1001 --from=alpha /tmp /tmp
 #ADD --chown=1001:1001 a /opt/commonvolume/dbencryption/
-ADD --chown=1001:1001 a /opt/commonvolume/
+#ADD --chown=1001:1001 a /opt/commonvolume/
 #ADD --chown=1001:1001 a /opt/commonvolume/customerskey/
 #ADD --chown=1001:1001 envconsul /tmp/envconsul
 #ADD --chown=1001:1001 contrast.jar /tmp/contrast.jar
@@ -31,4 +30,4 @@ EXPOSE 8080
 USER 100
 #ENTRYPOINT["/tmp/envconsul","-config=/etc/envconsul/envconsule-config.hcl","/lib/runtime/bin/java", "-Djavax.net.ssl.trustStore=/opt/commonvolume/keystore.jks","-Djavax.net.ssl.trustStorePassword=lban-1wpe", -Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2,TLSv11.3, "javaagent:/opt/app/elastic-apm-agent-1.9.0.jar", "javaagent:/tmp/contrast.jar", "-Dcontrast.api.ignore_cert_errors=true", "-Dcontrast.standalone.appname=PaaS-Microservice", "-Dcontrast.override.appversion=8d04c2bb-b187-4a09-8dea-35612d5a5d61", "-Dcontrast.dir=/tmp/contrast", "-Dcontrast.level=off", "-jar", "/opt/app/app.jar"]
 
-ENTRYPOINT["/lib/runtime/bin/java",  "-jar", "/opt/app/app.jar"]
+ENTRYPOINT ["/lib/runtime/bin/java",  "-jar", "/opt/app/app.jar"]

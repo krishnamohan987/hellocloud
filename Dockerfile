@@ -1,0 +1,7 @@
+FROM krishnamohan987/java-scratch:latest
+COPY target/*.jar /opt/app/app.jar
+#WORKDIR /app
+#EXPOSE 8080
+#CMD java -jar HelloCloud.jar
+#CMD java -jar *.jar
+#CMD ["java -jar ${artifact}"]

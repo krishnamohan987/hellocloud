@@ -1,0 +1,20 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "test123"
+  #namespace: "cka"
+  labels:
+    app: "test123"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "test123"
+  template:
+    metadata:
+      labels:
+        app: "test123"
+    spec:
+      containers:
+      - name: "test123"
+        image: "registry.hub.docker.com/krishnamohan987/hellocloud:$BUILD_NUMBER"

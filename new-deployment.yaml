@@ -17,4 +17,4 @@ spec:
     spec:
       containers:
       - name: "test123"
-        image: "registry.hub.docker.com/krishnamohan987/hellocloud:$BUILD_NUMBER"
+        image: "registry.hub.docker.com/krishnamohan987/hellocloud:latest"

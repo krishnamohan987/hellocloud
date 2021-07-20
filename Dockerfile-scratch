@@ -13,7 +13,7 @@ RUN     jlink \
         --output /lib/runtime \
         && rm -rf /lib/apk \
         && rm -rf /lib/runtime/legal \
-        && rm -rf /lib/runtime/security \
+        && rm -rf /lib/runtime/lib/security \
         && strip --strip-unneeded /lib/runtime/lib/server/libjvm.so \
         && cd /lib/runtime/lib;for i in `ls /lib/runtime/lib | grep -i so | awk '{ print $1}'`; do strip --strip-unneeded $i;done
 

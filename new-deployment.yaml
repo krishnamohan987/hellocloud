@@ -2,7 +2,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "test123"
-  #namespace: "cka"
+  namespace: "cka"
   labels:
     app: "test123"
 spec:

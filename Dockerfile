@@ -5,3 +5,4 @@ COPY target/*.jar /opt/app/app.jar
 #CMD java -jar HelloCloud.jar
 #CMD java -jar *.jar
 #CMD ["java -jar ${artifact}"]
+ENTRYPOINT ["/lib/runtime/bin/java",  "-jar", "/opt/app/app.jar"]

@@ -4,6 +4,6 @@ node {
   //code
   ENV_BUILD_TYPE='BuildInDev'
   
-  checkout($[$class: 'GitSCM', branches: [[name": '*/master']],userRemoteConfigs: [[credentialsId: 'git', url: 'git@github/...git']]])
+  checkout($[$class: 'GitSCM', branches: [[name": '*/master']],userRemoteConfigs: [[credentialsId: 'git-cred-jenkins', url: 'https://github.com/krishnamohan987/hellocloud.git']]])
   load 'Jenkinsfile'
 }

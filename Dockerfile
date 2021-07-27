@@ -10,6 +10,7 @@
 
 FROM openjdk:8-jre-alpine
 COPY target/*.jar /app/app.jar
+RUN chmod a+x /usr/lib/jvm/java-1.8-openjdk/jre/bin
 EXPOSE 8080
 ENTRYPOINT ["/usr/lib/jvm/java-1.8-openjdk/jre/bin",  "-jar", "/app/app.jar"]
 #ENTRYPOINT ["/bin/sh"]

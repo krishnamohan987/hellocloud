@@ -11,6 +11,6 @@
 FROM openjdk:8-jre-alpine
 COPY target/*.jar /app/app.jar
 EXPOSE 8080
-ENTRYPOINT ["/bin/sh"]
-CMD /usr/bin/java -jar /opt/app.jar
+#ENTRYPOINT ["/bin/sh"]
+CMD ["/usr/bin/java", "-jar", "/opt/app.jar"]
 #CMD ["/usr/bin/java -jar /app/app.jar"]

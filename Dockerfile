@@ -10,7 +10,7 @@
 
 FROM openjdk:8-jre-alpine
 #COPY target/*.jar /app/app.jar
-RUN addgroup -S 1001 && adduser -S appuser -G 1001
+RUN addgroup -S 1001 && adduser -S 1001 -G 1001
 RUN chown 1001:1001 /usr/lib/jvm/java-1.8-openjdk/jre/bin
 COPY --chown=1001:1001 target/*.jar /app/app.jar
 RUN chmod 775 -R /usr/lib/jvm/java-1.8-openjdk/jre/bin

@@ -12,7 +12,7 @@ FROM openjdk:8-jre-alpine
 USER 1001
 #COPY target/*.jar /app/app.jar
 
-ADD --chown=1001:1001 a /usr/lib/jvm/java-1.8-openjdk/jre/bin
+RUN chown 1001:1001 /usr/lib/jvm/java-1.8-openjdk/jre/bin
 COPY --chown=1001:1001 target/*.jar /app/app.jar
 #RUN chmod a+x /usr/lib/jvm/java-1.8-openjdk/jre/bin
 EXPOSE 8080

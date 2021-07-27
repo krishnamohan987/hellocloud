@@ -10,7 +10,7 @@
 
 FROM openjdk:8-jre-alpine
 #COPY target/*.jar /app/app.jar
-
+USER 1001
 RUN chown 1001:1001 /usr/lib/jvm/java-1.8-openjdk/jre/bin
 COPY --chown=1001:1001 target/*.jar /app/app.jar
 #RUN chmod a+x /usr/lib/jvm/java-1.8-openjdk/jre/bin

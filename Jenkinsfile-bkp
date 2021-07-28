@@ -34,11 +34,15 @@ pipeline {
             }
         stage('Push Image') {
             steps{
-                   script {
+                   /*script {
                     docker.withRegistry( '', registryCredential ) {
                             dockerImage.push() 
                                 }
-                            }
+                            }*/
+                   withDockerRegistry([credentialsId: 'docker-cred-jenkins', url: 'https://hub.docker.com']) {
+   							 // some block
+   							 sh "docker push $registry:latest"
+						}
            
                  }
             }

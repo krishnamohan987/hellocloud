@@ -1,7 +1,7 @@
 pipeline {
     
     environment {
-         registry = "krishnamohan987/java-scratch-springboot"
+         registry = "krishnamohan987/java-scratch-springboot-app"
          registryCredential = 'docker-cred-jenkins'
          dockerImage = ''
          mvnHome=tool name: 'M3', type: 'maven'

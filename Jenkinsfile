@@ -42,9 +42,9 @@ pipeline {
 		                steps{
 		                    script {
 								   withDockerRegistry([credentialsId: 'docker-cred-jenkins', url: 'https://hub.docker.com']) {
-		   							 sh "docker build -t $registry:latest ."
-		   							 sh "docker tag $registry:latest $registry:latest"
-		   							 sh "docker push $registry:latest"
+		   							 sh "docker build -t $registry:dev ."
+		   							 sh "docker tag $registry:latest $registry:dev"
+		   							 sh "docker push $registry:dev"
 								}
 		                    }
 		                }

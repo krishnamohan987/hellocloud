@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: "test123"
-        image: "krishnamohan987/java-scratch-springboot-app:latest"
+        image: "krishnamohan987/java-scratch-springboot-app:dev"
         imagePullPolicy: Always
         readinessProbe:
           httpGet:

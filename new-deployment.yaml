@@ -19,3 +19,8 @@ spec:
       - name: "test123"
         image: "krishnamohan987/java-scratch-springboot-app:latest"
         imagePullPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 11

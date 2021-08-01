@@ -1,33 +1,25 @@
 FROM    hirokimatsumoto/alpine-openjdk-11:latest as alpha
-#ENV    HTTP_PROXY=http://10.70.71.8:80
 RUN     apk upgrade --available
 RUN     apk add --no-cache ca-certificates java-cacerts openssl binutils
 RUN     jlink \
         --module-path /opt/java/jmods \
         --compress=2 \
-        --add-modules jdk.management.agent, java.base,java.logging, java.xml, jdk.unsupported, java.sql, java.naming, java.desktop, java.management, java.security.jgss, java.instrument, java.scripting, jdk.crypto.ec, java.rmi, jdk.httpserver, jdk.zips, jdk.net \
-        --scrit-debug \
+        --add-modules "jdk.management.agent,java.base,java.logging,java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,java.scripting,jdk.crypto.ec,java.rmi,jdk.httpserver,jdk.zipfs,jdk.net" \
+        --strip-debug \
         --no-header-files \
         --no-man-pages \
         --ignore-signing-information \
         --output /lib/runtime \
         && rm -rf /lib/apk \
         && rm -rf /lib/runtime/legal \
-        && rm -rf /lib/runtime/lib/security \
+        && rm -rf /lib/runtime/security \
         && strip --strip-unneeded /lib/runtime/lib/server/libjvm.so \
         && cd /lib/runtime/lib;for i in `ls /lib/runtime/lib | grep -i so | awk '{ print $1}'`; do strip --strip-unneeded $i;done
 
 FROM scratch
 COPY --chown=1001:1001 --from=alpha /lib /lib
 COPY --chown=1001:1001 --from=alpha /tmp /tmp
-#ADD --chown=1001:1001 a /opt/commonvolume/dbencryption/
-#ADD --chown=1001:1001 a /opt/commonvolume/
-#ADD --chown=1001:1001 a /opt/commonvolume/customerskey/
-#ADD --chown=1001:1001 envconsul /tmp/envconsul
-#ADD --chown=1001:1001 contrast.jar /tmp/contrast.jar
-#ADD --chown=1001:1001 elastic-apm-agent-1.9.0.jar /opt/app
+ADD --chown=1001:1001 a /opt/commonvolume/
 EXPOSE 8080
 USER 1001
-#ENTRYPOINT["/tmp/envconsul","-config=/etc/envconsul/envconsule-config.hcl","/lib/runtime/bin/java", "-Djavax.net.ssl.trustStore=/opt/commonvolume/keystore.jks","-Djavax.net.ssl.trustStorePassword=lban-1wpe", -Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2,TLSv11.3, "javaagent:/opt/app/elastic-apm-agent-1.9.0.jar", "javaagent:/tmp/contrast.jar", "-Dcontrast.api.ignore_cert_errors=true", "-Dcontrast.standalone.appname=PaaS-Microservice", "-Dcontrast.override.appversion=8d04c2bb-b187-4a09-8dea-35612d5a5d61", "-Dcontrast.dir=/tmp/contrast", "-Dcontrast.level=off", "-jar", "/opt/app/app.jar"]
-
-ENTRYPOINT ["/lib/runtime/bin/java",  "-jar", "/opt/app.jar"]
+ENTRYPOINT ["/lib/runtime/bin/java",  "-jar", "/opt/app/app.jar"]

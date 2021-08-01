@@ -22,7 +22,7 @@ spec:
         app: "$APPNAME"
     spec:
       containers:
-      - name: "test123"
+      - name: "$APPNAME"
         image: "krishnamohan987/java-scratch-springboot-app:dev"
         imagePullPolicy: Always
         readinessProbe:

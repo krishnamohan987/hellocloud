@@ -5,6 +5,7 @@ pipeline {
          registryCredential = 'docker-cred-jenkins'
          dockerImage = ''
          APPNAME = 'test123'
+         $TAG = 'dev'
          mvnHome=tool name: 'M3', type: 'maven'
     }
     agent any  
@@ -58,7 +59,7 @@ pipeline {
 				                def deployOutput = sh returnStdout: true, script: "'${kubectl}' get deploy test123 -n cka | grep -v NAME | wc -l"
 				                if(deployOutput.trim() != '1'){	                    
 				                    		                    
-				                    sh "cat new-deployment.yaml | sed 's/\$APPNAME/$APPNAME/' | '${kubectl}' create -f - -n cka"
+				                    sh "cat new-deployment.yaml | sed 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' | '${kubectl}' create -f - -n cka"
 				                }else{
 				                	sh "'${kubectl}' apply -f new-deployment.yaml"
 				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"

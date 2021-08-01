@@ -58,7 +58,7 @@ pipeline {
 				                if(deployOutput.trim() != '1'){
 				                    //sh "'${kubectl}' apply -f new-deployment.yaml"
 				                    //sh "'${kubectl}' process -p APPNAME=${appliaction} -f new-deployment.yaml | oc create -f -n cka"
-				                    sh "'${kubectl}' -k new-deployment.yaml | '${kubectl}' create -f -n cka"
+				                    sh "'${kubectl}' create -k new-deployment.yaml | '${kubectl}' create -f -n cka"
 				                }else{
 				                	sh "'${kubectl}' apply -f new-deployment.yaml"
 				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"

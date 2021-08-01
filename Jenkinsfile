@@ -60,6 +60,7 @@ pipeline {
 				                    //sh "'${kubectl}' process -p APPNAME=${appliaction} -f new-deployment.yaml | oc create -f -n cka"
 				                    //sh "'${kubectl}' create -k k8s/ | '${kubectl}' create -f -n cka"
 				                    sh "export APPNAME=test123"
+				                    sh "echo $APPNAME"
 				                    sh "envsubst < new-deployment.yaml | '${kubectl}' create -f -"
 				                }else{
 				                	sh "'${kubectl}' apply -f new-deployment.yaml"

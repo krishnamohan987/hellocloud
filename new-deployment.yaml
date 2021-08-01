@@ -10,7 +10,7 @@ spec:
   revisionHistoryLimit: 1
   selector:
     matchLabels:
-      app: "test123"
+      app: "$APPNAME"
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        app: "test123"
+        app: "$APPNAME"
     spec:
       containers:
       - name: "test123"

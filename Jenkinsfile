@@ -4,6 +4,7 @@ pipeline {
          registry = "krishnamohan987/java-scratch-springboot-app"
          registryCredential = 'docker-cred-jenkins'
          dockerImage = ''
+         //below should be env variables passed from the developer repo by developer
          APPNAME = 'test123'
          TAG = 'dev'
          mvnHome=tool name: 'M3', type: 'maven'

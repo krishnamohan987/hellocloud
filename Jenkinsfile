@@ -61,7 +61,7 @@ pipeline {
 				                    //sh "'${kubectl}' create -k k8s/ | '${kubectl}' create -f -n cka"
 				                    sh "export APPNAME=test123"
 				                    //sh "echo $APPNAME"
-				                    sh "envsubst < new-deployment.yaml | '${kubectl}' create -f -"
+				                    sh "cat new-deployment.yaml | envsubst - |  '${kubectl}' apply -f -"
 				                }else{
 				                	sh "'${kubectl}' apply -f new-deployment.yaml"
 				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"

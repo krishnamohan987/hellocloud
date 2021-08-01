@@ -15,13 +15,13 @@ pipeline {
 		                    git credentialsId: 'git-cred-jenkins', url: 'https://github.com/krishnamohan987/hellocloud.git'
 		                }
 		            }
-		   /*     stage('Maven') {
+		        stage('Maven') {
 		    
 		           steps {
 		                //sh 'mvn -Dmaven.test.failure.ignore=true install'
 		                 sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore=true install"
 		             }
-		        }*/
+		        }
 		           /* stage('Build Image') {
 		                steps{
 		                    script {
@@ -40,7 +40,7 @@ pipeline {
 		                 	}
 		            	} */
 					
-				/*	stage('Docker') {
+					stage('Docker') {
 		                steps{
 		                    script {
 								   withDockerRegistry([credentialsId: 'docker-cred-jenkins', url: 'https://hub.docker.com']) {
@@ -50,7 +50,7 @@ pipeline {
 								}
 		                    }
 		                }
-		            }*/	   		
+		            }	   		
 				    stage('K8S') {
 				      steps{
 				         script {

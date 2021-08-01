@@ -59,7 +59,7 @@ pipeline {
 				                    sh "'${kubectl}' apply -f new-deployment.yaml"
 				                }else{
 				                	//sh "'${kubectl}' apply -f new-deployment.yaml"
-				                    sh "'${kubectl}' rollout status deploy/test123 -n cka"
+				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"
 				                //sh "'${kubectl}' apply -f new-deployment.yaml"
 				                	}											                              
 				                }

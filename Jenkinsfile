@@ -58,8 +58,8 @@ pipeline {
 				                
 				                def deployOutput = sh returnStdout: true, script: "'${kubectl}' get deploy test123 -n cka | grep -v NAME | wc -l"
 				                if(deployOutput.trim() != '1'){	                    
-				                    		                    
-				                    sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml > new-deployment.yaml | '${kubectl}' create -f - -n cka"
+				                    sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml > new-deployment.yaml"		                    
+				                    //sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml > new-deployment.yaml | '${kubectl}' create -f - -n cka"
 				                }else{
 				                	//sh "'${kubectl}' apply -f new-deployment.yaml"
 				                	sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml | '${kubectl}' apply -f - -n cka"
@@ -76,16 +76,7 @@ pipeline {
 				        sh "docker rmi $registry:$BUILD_NUMBER"
 				      }
 				    }*/
-		    	stage('Test'){
-		    	    steps{
-		    	        script{
-		    	            sh 'echo "dummy stage"'
-		    	        }
 
-		    	    }
-
-		    	    
-		    	}
 
  	}
  }

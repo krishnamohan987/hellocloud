@@ -4,7 +4,7 @@ metadata:
   name: "$APPNAME"
   namespace: "cka"
   labels:
-    app: "test123"
+    app: "$APPNAME"
 spec:
   replicas: 1
   revisionHistoryLimit: 1

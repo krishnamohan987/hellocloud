@@ -60,7 +60,7 @@ pipeline {
 				                    //sh "'${kubectl}' process -p APPNAME=${appliaction} -f new-deployment.yaml | oc create -f -n cka"
 				                    //sh "'${kubectl}' create -k k8s/ | '${kubectl}' create -f -n cka"
 				                    sh "export APPNAME=test123"				                    
-				                    sh "cat new-deployment.yaml | envsubst | '${kubectl}' apply -f - -n cka"
+				                    sh "cat new-deployment.yaml | envsubst | '${kubectl}' create -f - -n cka"
 				                }else{
 				                	sh "'${kubectl}' apply -f new-deployment.yaml"
 				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"

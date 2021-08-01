@@ -5,7 +5,7 @@ pipeline {
          registryCredential = 'docker-cred-jenkins'
          dockerImage = ''
          APPNAME = 'test123'
-         $TAG = 'dev'
+         TAG = 'dev'
          mvnHome=tool name: 'M3', type: 'maven'
     }
     agent any  

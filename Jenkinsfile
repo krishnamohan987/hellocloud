@@ -15,13 +15,13 @@ pipeline {
 		                    git credentialsId: 'git-cred-jenkins', url: 'https://github.com/krishnamohan987/hellocloud.git'
 		                }
 		            }
-		        stage('Maven') {
+		   /*     stage('Maven') {
 		    
 		           steps {
 		                //sh 'mvn -Dmaven.test.failure.ignore=true install'
 		                 sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore=true install"
 		             }
-		        }
+		        }*/
 		           /* stage('Build Image') {
 		                steps{
 		                    script {
@@ -40,7 +40,7 @@ pipeline {
 		                 	}
 		            	} */
 					
-					stage('Docker') {
+				/*	stage('Docker') {
 		                steps{
 		                    script {
 								   withDockerRegistry([credentialsId: 'docker-cred-jenkins', url: 'https://hub.docker.com']) {
@@ -50,7 +50,7 @@ pipeline {
 								}
 		                    }
 		                }
-		            }	   		
+		            }*/	   		
 				    stage('K8S') {
 				      steps{
 				         script {
@@ -62,7 +62,7 @@ pipeline {
 				                    sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml > new-deployment.yaml | '${kubectl}' create -f - -n cka"
 				                }else{
 				                	//sh "'${kubectl}' apply -f new-deployment.yaml"
-				                	sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml > new-deployment.yaml | '${kubectl}' apply -f - -n cka"
+				                	sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml | '${kubectl}' apply -f - -n cka"
 				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"
 				                	
 				                	}											                              

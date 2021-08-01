@@ -56,11 +56,13 @@ pipeline {
 				                
 				                def deployOutput = sh returnStdout: true, script: "'${kubectl}' get deploy test123 -n cka | grep -v NAME | wc -l"
 				                if(deployOutput.trim() != '1'){
-				                    sh "'${kubectl}' apply -f new-deployment.yaml"
+				                    //sh "'${kubectl}' apply -f new-deployment.yaml"
+				                    //sh "'${kubectl}' process -p APPNAME=${appliaction} -f new-deployment.yaml | oc create -f -n cka"
+				                    sh "'${kubectl}' process -f new-deployment.yaml | oc create -f -n cka"
 				                }else{
-				                	//sh "'${kubectl}' apply -f new-deployment.yaml"
+				                	sh "'${kubectl}' apply -f new-deployment.yaml"
 				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"
-				                //sh "'${kubectl}' apply -f new-deployment.yaml"
+				                	
 				                	}											                              
 				                }
 				        	}

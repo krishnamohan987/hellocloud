@@ -26,7 +26,7 @@ public class HelloCloud {
 
 	@GetMapping("/basic1")
 	public ResponseEntity<?> getCloudBasicDetails() {
-		LOGGER.info("** START OF THE REQUEST ****");
+		LOGGER.info("** START OF THE REQUEST ****#");
 		CloudBasic basic = new CloudBasic();
 		basic.setGreeting("Hello World");
 		LOGGER.info("** END OF THE RESPONSE {} ****#", basic);

@@ -63,7 +63,8 @@ pipeline {
 				                    //sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml > new-deployment.yaml | '${kubectl}' create -f - -n cka"
 				                }else{
 				                	//sh "'${kubectl}' apply -f new-deployment.yaml"
-				                	sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml | '${kubectl}' apply -f - -n cka"
+				                	sh "sed -i -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml"	
+				                    sh "'${kubectl}' apply -f new-deployment.yaml -n cka"	
 				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"
 				                	
 				                	}											                              

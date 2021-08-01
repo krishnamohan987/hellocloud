@@ -54,7 +54,12 @@ pipeline {
 				         script {
 				            withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'kubernetes', contextName: 'kubernetes-admin@kubernetes', credentialsId: 'kubeconfigFile',  serverUrl: 'https://192.168.56.2:6443']]) {
 				                
-				                sh "'${kubectl}' apply -f new-deployment.yaml"				                              
+				                def deployOutput = sh returnStdout: true, script: "'${kubectl}' get deploy test123 -n cka | grep -v NAME | wc -l"
+				                if(deployOutput.trim() != '1'){
+				                    sh "'${kubectl}' apply -f new-deployment.yaml"
+				                }
+								sh "'${kubectl}' rollout latest deploy/test123 -n cka"
+				                //sh "'${kubectl}' apply -f new-deployment.yaml"				                              
 				                }
 				        	}
 				    	}

@@ -38,7 +38,7 @@ pipeline {
 		                 	}
 		            	} */
 					
-					stage('Docker') {
+				/*	stage('Docker') {
 		                steps{
 		                    script {
 								   withDockerRegistry([credentialsId: 'docker-cred-jenkins', url: 'https://hub.docker.com']) {
@@ -48,7 +48,7 @@ pipeline {
 								}
 		                    }
 		                }
-		            }	   		
+		            }	*/   		
 				    stage('K8S') {
 				      steps{
 				         script {
@@ -58,7 +58,7 @@ pipeline {
 				                if(deployOutput.trim() != '1'){
 				                    //sh "'${kubectl}' apply -f new-deployment.yaml"
 				                    //sh "'${kubectl}' process -p APPNAME=${appliaction} -f new-deployment.yaml | oc create -f -n cka"
-				                    sh "'${kubectl}' create -k new-deployment.yaml | '${kubectl}' create -f -n cka"
+				                    sh "'${kubectl}' create -k k8s/ | '${kubectl}' create -f -n cka"
 				                }else{
 				                	sh "'${kubectl}' apply -f new-deployment.yaml"
 				                    sh "'${kubectl}' rollout restart deploy/test123 -n cka"

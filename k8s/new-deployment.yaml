@@ -1,0 +1,34 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "test123"
+  namespace: "cka"
+  labels:
+    app: "test123"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: "test123"
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+       maxUnavailable: 25%
+       maxSurge: 1     
+  template:
+    metadata:
+      labels:
+        app: "test123"
+    spec:
+      containers:
+      - name: "test123"
+        image: "krishnamohan987/java-scratch-springboot-app:dev"
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1

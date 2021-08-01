@@ -14,13 +14,13 @@ pipeline {
 		                    git credentialsId: 'git-cred-jenkins', url: 'https://github.com/krishnamohan987/hellocloud.git'
 		                }
 		            }
-		   /*     stage('Maven') {
+		        stage('Maven') {
 		    
 		           steps {
 		                //sh 'mvn -Dmaven.test.failure.ignore=true install'
 		                 sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore=true install"
 		             }
-		        }*/
+		        }
 		           /* stage('Build Image') {
 		                steps{
 		                    script {
@@ -39,7 +39,7 @@ pipeline {
 		                 	}
 		            	} */
 					
-				/*	stage('Docker') {
+					stage('Docker') {
 		                steps{
 		                    script {
 								   withDockerRegistry([credentialsId: 'docker-cred-jenkins', url: 'https://hub.docker.com']) {
@@ -49,18 +49,15 @@ pipeline {
 								}
 		                    }
 		                }
-		            }	*/   		
+		            }	   		
 				    stage('K8S') {
 				      steps{
 				         script {
 				            withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'kubernetes', contextName: 'kubernetes-admin@kubernetes', credentialsId: 'kubeconfigFile',  serverUrl: 'https://192.168.56.2:6443']]) {
 				                
 				                def deployOutput = sh returnStdout: true, script: "'${kubectl}' get deploy test123 -n cka | grep -v NAME | wc -l"
-				                if(deployOutput.trim() != '1'){
-				                    //sh "'${kubectl}' apply -f new-deployment.yaml"
-				                    //sh "'${kubectl}' process -p APPNAME=${appliaction} -f new-deployment.yaml | oc create -f -n cka"
-				                    //sh "'${kubectl}' create -k k8s/ | '${kubectl}' create -f -n cka"
-				                    				                    
+				                if(deployOutput.trim() != '1'){	                    
+				                    		                    
 				                    sh "cat new-deployment.yaml | sed 's/\$APPNAME/$APPNAME/' | '${kubectl}' create -f - -n cka"
 				                }else{
 				                	sh "'${kubectl}' apply -f new-deployment.yaml"

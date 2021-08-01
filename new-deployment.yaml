@@ -10,7 +10,7 @@ spec:
   revisionHistoryLimit: 1
   selector:
     matchLabels:
-      app: "test123"
+      app: "test"
   strategy:
     type: RollingUpdate
     rollingUpdate:

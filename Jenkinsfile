@@ -58,7 +58,8 @@ pipeline {
 				                
 				                def deployOutput = sh returnStdout: true, script: "'${kubectl}' get deploy test123 -n cka | grep -v NAME | wc -l"
 				                if(deployOutput.trim() != '1'){	                    
-				                    sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml"		                    
+				                    sh "sed -i -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml"	
+				                    sh "'${kubectl}' create -f new-deployment.yaml -n cka"	                    
 				                    //sh "sed -e 's/\$APPNAME/$APPNAME/' -e 's/\$TAG/$TAG/' new-deployment.yaml > new-deployment.yaml | '${kubectl}' create -f - -n cka"
 				                }else{
 				                	//sh "'${kubectl}' apply -f new-deployment.yaml"

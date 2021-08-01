@@ -7,6 +7,7 @@ metadata:
     app: "test123"
 spec:
   replicas: 1
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: "test123"
